@@ -110,7 +110,7 @@ export const deleteLanguage = (
   languageId: number,
   userId: string
 ): Promise<ResponseModel<void>> => {
-  return LANGUAGES_CLIENT.delete(`/languages/soft-delete/${languageId}/${userId}`)
+  return LANGUAGES_CLIENT.delete(`/languages/${languageId}/${userId}`)
     .then((response) => response.data)
     .catch((error) => {
       if (axios.isAxiosError(error)) {
