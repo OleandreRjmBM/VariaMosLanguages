@@ -88,7 +88,7 @@ export const LanguagesList: FC<LanguagesProps> = ({
             <th>Type</th>
             {(pending || deleted) && <th>Status</th>}
             <th>Owner</th>
-            {(myLanguages || pending || deleted) && <th className="center">Actions</th>}
+            {(myLanguages || pending || deleted || (active && isLanguageDirector)) && <th className="center">Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -107,7 +107,7 @@ export const LanguagesList: FC<LanguagesProps> = ({
               <td onClick={() => onLanguageClick(language)}>
                 {language?.["ownerName"]}
               </td>
-              {(myLanguages || pending || deleted) && (
+              {(myLanguages || pending || deleted ||(active && isLanguageDirector)) && (
                 <td className="text-center">
                   <div className="d-flex gap-1 center">
                     {pending && (
@@ -121,7 +121,7 @@ export const LanguagesList: FC<LanguagesProps> = ({
                           <CheckLg />
                         </Button>
                       )}
-                    {active && (
+                    {(active && isLanguageDirector) && (
                         <Button
                           className="btn-Variamos-yellow"
                           title="Disapprove Language"
@@ -147,7 +147,7 @@ export const LanguagesList: FC<LanguagesProps> = ({
                       )}
                     { ((myLanguages &&
                         language?.accessLevel?.toLowerCase() == "owner") ||
-                        pending) && (
+                        pending || (active && isLanguageDirector)) && (
                         <Button
                           variant="danger"
                           onClick={() => onLanguageDelete(language)}
